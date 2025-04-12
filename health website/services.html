@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - HealthCare Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-heartbeat"></i>
+            <span>HealthCare Connect</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+        </div>
+        <div class="login-buttons">
+            <button class="btn patient-login" onclick="showLoginModal('patient')">Patient Login</button>
+            <button class="btn doctor-login" onclick="showLoginModal('doctor')">Doctor Login</button>
+        </div>
+    </nav>
+
+    <div class="services-container">
+        <section class="chat-section">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2>AI Health Assistant</h2>
+                    <p>Get instant answers to your health-related questions</p>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai">
+                        <p>Hello! I'm your AI health assistant. How can I help you today?</p>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="userInput" placeholder="Type your message here...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+                <div class="chat-actions">
+                    <button class="btn secondary-btn" onclick="connectToAgent()">Connect to Human Agent</button>
+                    <button class="btn secondary-btn" onclick="showCommonQuestions()">Common Questions</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-info">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Health Assistant</h3>
+                    <p>Get instant answers to your health-related questions from our AI assistant.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>Human Support</h3>
+                    <p>Connect with our healthcare professionals for personalized assistance.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Appointment Booking</h3>
+                    <p>Schedule appointments with healthcare providers easily.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-prescription"></i>
+                    <h3>Prescription Management</h3>
+                    <p>Manage and track your prescriptions digitally.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Agent Connection Modal -->
+    <div id="agentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAgentModal()">&times;</span>
+            <h2>Connect with an Agent</h2>
+            <p>Please provide some details about your query to connect you with the appropriate agent.</p>
+            <form id="agentForm">
+                <div class="form-group">
+                    <label for="queryType">Type of Query</label>
+                    <select id="queryType" required>
+                        <option value="">Select query type</option>
+                        <option value="medical">Medical Advice</option>
+                        <option value="technical">Technical Support</option>
+                        <option value="appointment">Appointment Related</option>
+                        <option value="prescription">Prescription Related</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="queryDescription">Brief Description</label>
+                    <textarea id="queryDescription" required placeholder="Please describe your query in detail..."></textarea>
+                </div>
+                <button type="submit" class="btn primary-btn">Connect to Agent</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="services.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
