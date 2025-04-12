@@ -1,0 +1,140 @@
+.about-container {
+    padding: 80px 20px 20px;
+    background-color: var(--background-color);
+    min-height: 100vh;
+    transition: background-color 0.3s ease;
+}
+
+.about-hero {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    margin-bottom: 40px;
+    transition: background-color 0.3s ease;
+}
+
+.about-hero h1 {
+    color: var(--text-color);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+.about-hero p {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    transition: color 0.3s ease;
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.mission-vision {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.card {
+    background-color: var(--modal-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .card {
+    box-shadow: 0 2px 5px rgba(255,255,255,0.1);
+    background-color: var(--modal-bg);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+[data-theme="dark"] .card:hover {
+    box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+}
+
+.card h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    transition: color 0.3s ease;
+}
+
+.card p {
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+/* Theme toggle button styles */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    color: var(--primary-color);
+}
+
+.theme-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover i {
+    transform: rotate(360deg);
+}
+
+/* Modal dark mode styles */
+[data-theme="dark"] .modal-content {
+    background-color: var(--modal-bg);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .form-group label {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .form-group input {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .about-hero p {
+        font-size: 1rem;
+    }
+    
+    .card h2 {
+        font-size: 1.5rem;
+    }
+    
+    .card p {
+        font-size: 1rem;
+    }
+} 

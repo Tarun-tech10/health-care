@@ -25,7 +25,7 @@ window.onclick = function(event) {
 }
 
 // Handle login form submission
-document.getElementById('loginForm').addEventListener('submit', async function(e) {
+document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
     const email = document.getElementById('email').value;
@@ -37,41 +37,58 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         return;
     }
 
-    try {
-        const response = await fetch('http://localhost:5000/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email,
-                password,
-                userType
-            })
-        });
+    // Store user information in localStorage
+    localStorage.setItem('userType', userType);
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userName', email.split('@')[0]); // Use email username as name
 
-        const data = await response.json();
-
-        if (data.success) {
-            // Store user information in localStorage
-            localStorage.setItem('userType', userType);
-            localStorage.setItem('userEmail', email);
-            localStorage.setItem('userName', data.name);
-            localStorage.setItem('userId', data.id);
-
-            // Redirect based on user type
-            if (userType === 'patient') {
-                window.location.href = 'dashboard.html';
-            } else if (userType === 'doctor') {
-                window.location.href = 'doctor-dashboard.html';
-            }
-        } else {
-            alert(data.message || 'Invalid credentials. Please try again.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
+    // Redirect based on user type
+    if (userType === 'patient') {
+        window.location.href = 'patient-dashboard.html';
+    } else if (userType === 'doctor') {
+        window.location.href = 'doctor-dashboard.html';
     }
+});
+
+// Show registration form
+function showRegistrationForm() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('registrationForm').style.display = 'block';
+    document.getElementById('modalTitle').textContent = 'Register';
+}
+
+// Show login form
+function showLoginForm() {
+    document.getElementById('registrationForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('modalTitle').textContent = 'Login';
+}
+
+// Handle registration form submission
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('regName').value;
+    const email = document.getElementById('regEmail').value;
+    const password = document.getElementById('regPassword').value;
+    const userType = document.getElementById('loginForm').getAttribute('data-user-type');
+
+    if (!name || !email || !password) {
+        alert('Please fill in all fields');
+        return;
+    }
+
+    // Store registration info in localStorage
+    localStorage.setItem('userType', userType);
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userName', name);
+
+    alert('Registration successful! Please login.');
+    showLoginForm();
+    // Clear registration form
+    document.getElementById('regName').value = '';
+    document.getElementById('regEmail').value = '';
+    document.getElementById('regPassword').value = '';
 });
 
 // Check if user is already logged in
@@ -83,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // If on index page and logged in, redirect to appropriate dashboard
         if (currentPath.endsWith('index.html') || currentPath === '/') {
             if (userType === 'patient') {
-                window.location.href = 'dashboard.html';
+                window.location.href = 'patient-dashboard.html';
             } else if (userType === 'doctor') {
                 window.location.href = 'doctor-dashboard.html';
             }

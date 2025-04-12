@@ -14,9 +14,17 @@
             <span>HealthCare Connect</span>
         </div>
         <div class="nav-links">
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="services.html">Services</a>
             <a href="about.html">About</a>
+            <div class="theme-toggle">
+                <input type="checkbox" id="darkModeToggle" class="dark-mode-checkbox">
+                <label for="darkModeToggle" class="dark-mode-label">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                    <span class="toggle-ball"></span>
+                </label>
+            </div>
         </div>
         <div class="login-buttons">
             <button class="btn patient-login" onclick="showLoginModal('patient')">Patient Login</button>
@@ -47,10 +55,29 @@
                     <input type="password" id="password" required>
                 </div>
                 <button type="submit" class="btn primary-btn">Login</button>
+                <p class="switch-form">Don't have an account? <a href="#" onclick="showRegistrationForm()">Register here</a></p>
+            </form>
+
+            <form id="registrationForm" style="display: none;">
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" required>
+                </div>
+                <button type="submit" class="btn primary-btn">Register</button>
+                <p class="switch-form">Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
             </form>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <script src="darkMode.js"></script>
 </body>
 </html> 

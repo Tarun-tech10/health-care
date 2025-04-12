@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - HealthCare Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="about.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-heartbeat"></i>
+            <span>HealthCare Connect</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="about.html" class="active">About</a>
+        </div>
+        <div class="login-buttons">
+            <button class="btn patient-login" onclick="showLoginModal('patient')">Patient Login</button>
+            <button class="btn doctor-login" onclick="showLoginModal('doctor')">Doctor Login</button>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="about-container">
+        <section class="about-hero">
+            <h1>Transforming Healthcare Through Technology</h1>
+            <p>Bridging the gap between patients and healthcare providers with innovative digital solutions</p>
+        </section>
+
+        <section class="about-content">
+            <div class="mission-vision">
+                <div class="card">
+                    <h2>Our Mission</h2>
+                    <p>To provide accessible, efficient, and high-quality healthcare services through digital innovation.</p>
+                </div>
+                <div class="card">
+                    <h2>Our Vision</h2>
+                    <p>To revolutionize healthcare delivery by creating a seamless connection between patients and healthcare providers.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn primary-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="theme.js"></script>
+</body>
+</html> 

@@ -18,6 +18,14 @@
             <a href="index.html">Home</a>
             <a href="services.html">Services</a>
             <a href="about.html">About</a>
+            <div class="theme-toggle">
+                <input type="checkbox" id="darkModeToggle" class="dark-mode-checkbox">
+                <label for="darkModeToggle" class="dark-mode-label">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                    <span class="toggle-ball"></span>
+                </label>
+            </div>
         </div>
         <div class="login-buttons">
             <button class="btn patient-login" onclick="showLoginModal('patient')">Patient Login</button>
@@ -39,7 +47,7 @@
                 </div>
                 <div class="chat-input">
                     <input type="text" id="userInput" placeholder="Type your message here...">
-                    <button onclick="sendMessage()">Send</button>
+                    <button onclick="sendMessage()"><span>Send</span></button>
                 </div>
                 <div class="chat-actions">
                     <button class="btn secondary-btn" onclick="connectToAgent()">Connect to Human Agent</button>
@@ -104,5 +112,6 @@
 
     <script src="services.js"></script>
     <script src="script.js"></script>
+    <script src="darkMode.js"></script>
 </body>
 </html> 
