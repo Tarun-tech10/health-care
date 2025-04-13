@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Dashboard - HealthCare Connect</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -15,131 +14,107 @@
             <span>HealthCare Connect</span>
         </div>
         <div class="nav-links">
-            <a href="#dashboard" class="active">Dashboard</a>
-            <a href="#patients">Patients</a>
-            <a href="#appointments">Appointments</a>
-            <a href="#prescriptions">Prescriptions</a>
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Appointments</a>
+            <a href="#">Patients</a>
+            <a href="#">Schedule</a>
         </div>
-        <div class="user-profile">
-            <span class="user-name">Dr. Sarah Johnson</span>
-            <button class="btn logout-btn" onclick="logout()">Logout</button>
+        <div class="user-actions">
+            <span class="user-name"></span>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button onclick="logout()" class="logout-btn">Logout</button>
         </div>
     </nav>
 
-    <main class="dashboard-container">
+    <main class="dashboard-content">
+        <h1>Welcome, Dr. <span class="user-name"></span></h1>
+        
         <section class="quick-actions">
             <h2>Quick Actions</h2>
-            <div class="action-cards">
-                <div class="card" onclick="startVideoConsultation()">
+            <div class="action-grid">
+                <div class="action-card" onclick="handleConsultations()">
                     <i class="fas fa-video"></i>
-                    <h3>Start Consultation</h3>
-                    <p>Begin a video call with patient</p>
+                    <h3>Video Consultations</h3>
+                    <p>Manage your online consultations</p>
                 </div>
-                <div class="card" onclick="viewPatientList()">
-                    <i class="fas fa-user-friends"></i>
-                    <h3>Patient List</h3>
-                    <p>View and manage patients</p>
+                <div class="action-card" onclick="handlePatients()">
+                    <i class="fas fa-user-injured"></i>
+                    <h3>Patient Records</h3>
+                    <p>View and manage patient records</p>
                 </div>
-                <div class="card" onclick="viewAppointments()">
-                    <i class="fas fa-calendar-check"></i>
-                    <h3>Appointments</h3>
-                    <p>Manage your schedule</p>
-                </div>
-                <div class="card" onclick="writePrescription()">
+                <div class="action-card" onclick="handlePrescriptions()">
                     <i class="fas fa-prescription"></i>
-                    <h3>Write Prescription</h3>
-                    <p>Create new prescriptions</p>
+                    <h3>Prescriptions</h3>
+                    <p>Write and manage prescriptions</p>
+                </div>
+                <div class="action-card" onclick="handleSchedule()">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Schedule</h3>
+                    <p>Manage your appointments</p>
                 </div>
             </div>
         </section>
 
-        <section class="upcoming-appointments">
+        <section class="appointments">
             <h2>Today's Appointments</h2>
-            <div class="appointment-list">
-                <div class="appointment-card">
-                    <div class="appointment-info">
-                        <h3>John Doe</h3>
-                        <p>Regular Checkup</p>
-                        <p class="date-time">10:00 AM - 10:30 AM</p>
-                    </div>
-                    <div class="appointment-actions">
-                        <button class="btn primary-btn" onclick="startVideoCall('john_doe')">Start Call</button>
-                        <button class="btn secondary-btn" onclick="viewPatientHistory('john_doe')">History</button>
-                    </div>
+            <div class="appointment-card">
+                <div class="appointment-info">
+                    <h3>John Smith</h3>
+                    <p>General Consultation</p>
+                    <p class="appointment-time">10:00 AM</p>
                 </div>
-                <div class="appointment-card">
-                    <div class="appointment-info">
-                        <h3>Jane Smith</h3>
-                        <p>Follow-up Consultation</p>
-                        <p class="date-time">11:00 AM - 11:30 AM</p>
-                    </div>
-                    <div class="appointment-actions">
-                        <button class="btn primary-btn" onclick="startVideoCall('jane_smith')">Start Call</button>
-                        <button class="btn secondary-btn" onclick="viewPatientHistory('jane_smith')">History</button>
-                    </div>
-                </div>
+                <button class="join-call-btn" onclick="handleStartCall()">Start Call</button>
             </div>
-        </section>
-
-        <section class="recent-patients">
-            <h2>Recent Patients</h2>
-            <div class="patient-list">
-                <div class="patient-card">
-                    <div class="patient-info">
-                        <h3>John Doe</h3>
-                        <p>Last Visit: 2 days ago</p>
-                        <p class="condition">Hypertension</p>
-                    </div>
-                    <button class="btn primary-btn" onclick="viewPatientDetails('john_doe')">View Details</button>
+            <div class="appointment-card">
+                <div class="appointment-info">
+                    <h3>Emma Wilson</h3>
+                    <p>Follow-up Consultation</p>
+                    <p class="appointment-time">11:30 AM</p>
                 </div>
-                <div class="patient-card">
-                    <div class="patient-info">
-                        <h3>Jane Smith</h3>
-                        <p>Last Visit: 1 week ago</p>
-                        <p class="condition">Diabetes</p>
-                    </div>
-                    <button class="btn primary-btn" onclick="viewPatientDetails('jane_smith')">View Details</button>
-                </div>
+                <button class="join-call-btn" onclick="handleStartCall()">Start Call</button>
             </div>
         </section>
     </main>
 
-    <!-- Video Call Modal -->
-    <div id="videoCallModal" class="modal">
-        <div class="modal-content video-call-content">
-            <span class="close" onclick="closeVideoCall()">&times;</span>
-            <div class="video-container">
-                <video id="localVideo" autoplay muted></video>
-                <video id="remoteVideo" autoplay></video>
-            </div>
-            <div class="call-controls">
-                <button class="btn call-btn" onclick="toggleMute()">
-                    <i class="fas fa-microphone"></i>
-                </button>
-                <button class="btn call-btn" onclick="toggleVideo()">
-                    <i class="fas fa-video"></i>
-                </button>
-                <button class="btn call-btn" onclick="toggleScreenShare()">
-                    <i class="fas fa-desktop"></i>
-                </button>
-                <button class="btn end-call-btn" onclick="endCall()">
-                    <i class="fas fa-phone-slash"></i>
-                </button>
-            </div>
-        </div>
-    </div>
+    <script src="theme.js"></script>
+    <script>
+        // Load user data
+        document.addEventListener('DOMContentLoaded', function() {
+            const userName = localStorage.getItem('userName') || 'Doctor';
+            const userNameElements = document.querySelectorAll('.user-name');
+            userNameElements.forEach(element => {
+                element.textContent = userName;
+            });
+        });
 
-    <!-- Patient History Modal -->
-    <div id="patientHistoryModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closePatientHistory()">&times;</span>
-            <h2>Patient History</h2>
-            <div class="history-content">
-                <!-- History content will be dynamically loaded -->
-            </div>
-        </div>
-    </div>
+        function handleConsultations() {
+            alert('Opening video consultations...');
+        }
 
-    <script src="doctor-dashboard.js"></script>
+        function handlePatients() {
+            alert('Opening patient records...');
+        }
+
+        function handlePrescriptions() {
+            alert('Opening prescriptions manager...');
+        }
+
+        function handleSchedule() {
+            alert('Opening schedule manager...');
+        }
+
+        function handleStartCall() {
+            alert('Starting video call with patient...');
+        }
+
+        function logout() {
+            localStorage.removeItem('userType');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            window.location.href = './index.html';
+        }
+    </script>
 </body>
 </html> 

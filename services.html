@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - HealthCare Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-heartbeat"></i>
+            <span>HealthCare Connect</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="about.html">About</a>
+        </div>
+        <div class="login-buttons">
+            <button class="btn patient-login" onclick="showLoginModal('patient')">Patient Login</button>
+            <button class="btn doctor-login" onclick="showLoginModal('doctor')">Doctor Login</button>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="services-container">
+        <section class="services-hero">
+            <h1>Our Services</h1>
+            <p>Comprehensive healthcare solutions at your fingertips</p>
+        </section>
+
+        <section class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-video"></i>
+                <h2>Video Consultations</h2>
+                <p>Connect with healthcare professionals through secure video calls</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-prescription-bottle-alt"></i>
+                <h2>E-Prescriptions</h2>
+                <p>Get digital prescriptions delivered directly to your pharmacy</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-calendar-check"></i>
+                <h2>Appointment Scheduling</h2>
+                <p>Book and manage your appointments with ease</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-file-medical"></i>
+                <h2>Health Records</h2>
+                <p>Access and manage your medical records securely</p>
+            </div>
+        </section>
+
+        <section class="ai-chat-section">
+            <h2>AI Health Assistant</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input">
+                    <input type="text" id="userInput" placeholder="Ask me anything about healthcare...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+            <div class="connect-agent">
+                <p>Need human assistance?</p>
+                <button class="btn primary-btn" onclick="showAgentModal()">Connect with Agent</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Agent Connection Modal -->
+    <div id="agentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAgentModal()">&times;</span>
+            <h2>Connect with Human Agent</h2>
+            <form id="agentForm">
+                <div class="form-group">
+                    <label for="agentName">Your Name</label>
+                    <input type="text" id="agentName" required>
+                </div>
+                <div class="form-group">
+                    <label for="agentEmail">Your Email</label>
+                    <input type="email" id="agentEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="agentMessage">Your Message</label>
+                    <textarea id="agentMessage" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn primary-btn">Request Connection</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn primary-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="theme.js"></script>
+    <script>
+        // Agent connection functionality
+        function showAgentModal() {
+            document.getElementById('agentModal').style.display = 'block';
+        }
+
+        function closeAgentModal() {
+            document.getElementById('agentModal').style.display = 'none';
+        }
+
+        document.getElementById('agentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('agentName').value;
+            const email = document.getElementById('agentEmail').value;
+            const message = document.getElementById('agentMessage').value;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/connect-agent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Your request has been sent successfully. An agent will contact you shortly.');
+                    closeAgentModal();
+                    // Clear form
+                    document.getElementById('agentForm').reset();
+                } else {
+                    alert('Failed to send request. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const agentModal = document.getElementById('agentModal');
+            const loginModal = document.getElementById('loginModal');
+            
+            if (event.target == agentModal) {
+                closeAgentModal();
+            }
+            if (event.target == loginModal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html> 

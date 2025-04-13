@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,25 +14,125 @@
             <i class="fas fa-heartbeat"></i>
             <span>HealthCare Connect</span>
         </div>
-        <div class="nav-links">
-            <a href="#dashboard" class="active">Dashboard</a>
-            <a href="#patients">Patients</a>
-            <a href="#appointments">Appointments</a>
-            <a href="#prescriptions">Prescriptions</a>
+        <div class="theme-toggle-container">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <i class="fas fa-sun"></i>
+            </button>
         </div>
         <div class="user-profile">
             <span class="user-name">Dr. Sarah Johnson</span>
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <i class="fas fa-moon"></i>
-            </button>
             <button class="btn logout-btn" onclick="logout()">Logout</button>
         </div>
     </nav>
 
-    // ... existing dashboard content ...
+    <div class="dashboard-container">
+        <h1>Quick Actions</h1>
+        
+        <div class="quick-actions-grid">
+            <!-- Patient Appointments Quick Action -->
+            <div class="quick-action-card" onclick="handlePatientAppointments()">
+                <div class="icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3>Patient Appointments</h3>
+                <p>Manage your appointments</p>
+            </div>
+
+            <!-- Patient Records Quick Action -->
+            <div class="quick-action-card" onclick="handlePatientRecords()">
+                <div class="icon">
+                    <i class="fas fa-file-medical"></i>
+                </div>
+                <h3>Patient Records</h3>
+                <p>View and update medical records</p>
+            </div>
+
+            <!-- Prescribe Medicines Quick Action -->
+            <div class="quick-action-card" onclick="handlePrescribeMedicines()">
+                <div class="icon">
+                    <i class="fas fa-prescription-bottle-medical"></i>
+                </div>
+                <h3>Prescribe Medicines</h3>
+                <p>Write new prescriptions</p>
+            </div>
+
+            <!-- Analytics Quick Action -->
+            <div class="quick-action-card" onclick="handleAnalytics()">
+                <div class="icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Analytics</h3>
+                <p>View patient statistics</p>
+            </div>
+        </div>
+
+        <!-- Upcoming Appointments Section -->
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2>Today's Appointments</h2>
+            </div>
+            <div class="appointment-card">
+                <div class="appointment-info">
+                    <img src="https://via.placeholder.com/50" alt="John Doe" class="patient-avatar">
+                    <div class="details">
+                        <h3>John Doe</h3>
+                        <p>Regular Checkup</p>
+                        <p class="appointment-time">10:00 AM</p>
+                    </div>
+                </div>
+                <div class="appointment-actions">
+                    <button class="btn join-btn" onclick="handleStartConsultation()">Start Consultation</button>
+                    <button class="btn reschedule-btn" onclick="handleReschedule()">Reschedule</button>
+                </div>
+            </div>
+
+            <div class="appointment-card">
+                <div class="appointment-info">
+                    <img src="https://via.placeholder.com/50" alt="Jane Smith" class="patient-avatar">
+                    <div class="details">
+                        <h3>Jane Smith</h3>
+                        <p>Follow-up</p>
+                        <p class="appointment-time">11:30 AM</p>
+                    </div>
+                </div>
+                <div class="appointment-actions">
+                    <button class="btn join-btn" onclick="handleStartConsultation()">Start Consultation</button>
+                    <button class="btn reschedule-btn" onclick="handleReschedule()">Reschedule</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Patient Updates Section -->
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2>Recent Patient Updates</h2>
+            </div>
+            <div class="updates-card">
+                <div class="update-item">
+                    <div class="update-info">
+                        <h3>Medical Report Updated</h3>
+                        <p>Blood test results for John Doe</p>
+                        <p class="update-time">30 minutes ago</p>
+                    </div>
+                    <button class="btn view-btn" onclick="handleViewUpdate()">View</button>
+                </div>
+                <div class="update-item">
+                    <div class="update-info">
+                        <h3>Prescription Renewal</h3>
+                        <p>Request from Jane Smith</p>
+                        <p class="update-time">1 hour ago</p>
+                    </div>
+                    <button class="btn view-btn" onclick="handleViewUpdate()">View</button>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <script>
-        // Theme toggle functionality
+        // Force dark theme
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -41,20 +141,55 @@
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             
-            // Update theme toggle icon
             const themeIcon = document.querySelector('.theme-toggle i');
             themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
 
-        // Check for saved theme preference
+        // Initialize with dark theme
         document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            
-            // Set correct icon
+            document.documentElement.setAttribute('data-theme', 'dark');
             const themeIcon = document.querySelector('.theme-toggle i');
-            themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            themeIcon.className = 'fas fa-sun';
         });
+
+        function handlePatientAppointments() {
+            alert('Opening patient appointments...');
+        }
+
+        function handlePatientRecords() {
+            alert('Opening patient records...');
+        }
+
+        function handlePrescribeMedicines() {
+            alert('Opening prescription interface...');
+        }
+
+        function handleAnalytics() {
+            alert('Opening analytics dashboard...');
+        }
+
+        function handleStartConsultation() {
+            alert('Starting video consultation...');
+        }
+
+        function handleReschedule() {
+            alert('Opening reschedule interface...');
+        }
+
+        function handleViewUpdate() {
+            alert('Opening update details...');
+        }
+
+        function logout() {
+            // Clear all user data from localStorage
+            localStorage.removeItem('userType');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('theme');
+            
+            // Redirect to login page
+            window.location.href = 'health website/index.html';
+        }
     </script>
 </body>
 </html> 

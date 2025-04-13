@@ -2,18 +2,20 @@
 function showLoginModal(type) {
     const modal = document.getElementById('loginModal');
     const modalTitle = document.getElementById('modalTitle');
+    const userTypeSelect = document.getElementById('userType');
+    
     modalTitle.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)} Login`;
     modal.style.display = 'block';
-    // Store the user type for form submission
-    document.getElementById('loginForm').setAttribute('data-user-type', type);
+    
+    // Set the selected user type
+    userTypeSelect.value = type;
 }
 
 function closeModal() {
     const modal = document.getElementById('loginModal');
     modal.style.display = 'none';
     // Clear form fields
-    document.getElementById('email').value = '';
-    document.getElementById('password').value = '';
+    document.getElementById('loginForm').reset();
 }
 
 // Close modal when clicking outside
@@ -30,23 +32,24 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const userType = this.getAttribute('data-user-type');
+    const userType = document.getElementById('userType').value;
 
+    // Simple validation
     if (!email || !password) {
-        alert('Please enter both email and password');
+        alert('Please fill in all fields');
         return;
     }
 
-    // Store user information in localStorage
+    // Store user data in localStorage
     localStorage.setItem('userType', userType);
     localStorage.setItem('userEmail', email);
     localStorage.setItem('userName', email.split('@')[0]); // Use email username as name
 
     // Redirect based on user type
-    if (userType === 'patient') {
-        window.location.href = 'patient-dashboard.html';
-    } else if (userType === 'doctor') {
-        window.location.href = 'doctor-dashboard.html';
+    if (userType === 'doctor') {
+        window.location.href = './doctor-dashboard.html';
+    } else {
+        window.location.href = './patient-dashboard.html';
     }
 });
 
@@ -71,7 +74,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     const name = document.getElementById('regName').value;
     const email = document.getElementById('regEmail').value;
     const password = document.getElementById('regPassword').value;
-    const userType = document.getElementById('loginForm').getAttribute('data-user-type');
+    const userType = document.getElementById('userType').value;
 
     if (!name || !email || !password) {
         alert('Please fill in all fields');
@@ -100,15 +103,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // If on index page and logged in, redirect to appropriate dashboard
         if (currentPath.endsWith('index.html') || currentPath === '/') {
             if (userType === 'patient') {
-                window.location.href = 'patient-dashboard.html';
+                window.location.href = './patient-dashboard.html';
             } else if (userType === 'doctor') {
-                window.location.href = 'doctor-dashboard.html';
+                window.location.href = './doctor-dashboard.html';
             }
         }
     } else {
         // If not logged in and trying to access dashboards, redirect to index
         if (currentPath.includes('dashboard')) {
-            window.location.href = 'index.html';
+            window.location.href = './index.html';
         }
     }
 }); 

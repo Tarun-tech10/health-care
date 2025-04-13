@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Dashboard - HealthCare Connect</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -15,37 +14,42 @@
             <span>HealthCare Connect</span>
         </div>
         <div class="nav-links">
-            <a href="#dashboard" class="active">Dashboard</a>
-            <a href="#appointments">Appointments</a>
-            <a href="#prescriptions">Prescriptions</a>
-            <a href="#medicines">Medicines</a>
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Appointments</a>
+            <a href="#">Prescriptions</a>
+            <a href="#">Medicines</a>
         </div>
-        <div class="user-profile">
-            <span class="user-name">John Doe</span>
-            <button class="btn logout-btn" onclick="logout()">Logout</button>
+        <div class="user-actions">
+            <span class="user-name"></span>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button onclick="logout()" class="logout-btn">Logout</button>
         </div>
     </nav>
 
-    <main class="dashboard-container">
+    <main class="dashboard-content">
+        <h1>Welcome, <span class="user-name"></span></h1>
+        
         <section class="quick-actions">
             <h2>Quick Actions</h2>
-            <div class="action-cards">
-                <div class="card" onclick="startVideoCall()">
+            <div class="action-grid">
+                <div class="action-card" onclick="handleVideoConsult()">
                     <i class="fas fa-video"></i>
                     <h3>Video Consultation</h3>
                     <p>Connect with your doctor</p>
                 </div>
-                <div class="card" onclick="viewPrescriptions()">
+                <div class="action-card" onclick="handlePrescriptions()">
                     <i class="fas fa-prescription"></i>
                     <h3>Prescriptions</h3>
                     <p>View your medical prescriptions</p>
                 </div>
-                <div class="card" onclick="viewMedicines()">
+                <div class="action-card" onclick="handleMedicines()">
                     <i class="fas fa-pills"></i>
                     <h3>Daily Medicines</h3>
                     <p>Track your medication schedule</p>
                 </div>
-                <div class="card" onclick="contactSupport()">
+                <div class="action-card" onclick="handleSupport()">
                     <i class="fas fa-headset"></i>
                     <h3>Support</h3>
                     <p>Get help and support</p>
@@ -53,57 +57,75 @@
             </div>
         </section>
 
-        <section class="upcoming-appointments">
+        <section class="appointments">
             <h2>Upcoming Appointments</h2>
-            <div class="appointment-list">
-                <div class="appointment-card">
-                    <div class="appointment-info">
-                        <h3>Dr. Sarah Johnson</h3>
-                        <p>Cardiologist</p>
-                        <p class="date-time">Tomorrow, 10:00 AM</p>
-                    </div>
-                    <button class="btn primary-btn">Join Call</button>
+            <div class="appointment-card">
+                <div class="appointment-info">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p>Cardiologist</p>
+                    <p class="appointment-time">Tomorrow, 10:00 AM</p>
                 </div>
+                <button class="join-call-btn" onclick="handleJoinCall()">Join Call</button>
             </div>
         </section>
 
-        <section class="daily-medicines">
+        <section class="medicines">
             <h2>Today's Medicines</h2>
-            <div class="medicine-list">
-                <div class="medicine-card">
-                    <div class="medicine-info">
-                        <h3>Paracetamol</h3>
-                        <p>500mg Tablet</p>
-                        <p class="time">8:00 AM, 2:00 PM, 8:00 PM</p>
-                    </div>
-                    <button class="btn secondary-btn">Mark as Taken</button>
+            <div class="medicine-card">
+                <div class="medicine-info">
+                    <h3>Paracetamol</h3>
+                    <p>500mg Tablet</p>
+                    <p class="medicine-time">8:00 AM, 2:00 PM, 8:00 PM</p>
                 </div>
+                <button class="mark-taken-btn" onclick="handleMarkAsTaken(this)">Mark as Taken</button>
             </div>
         </section>
     </main>
 
-    <!-- Video Call Modal -->
-    <div id="videoCallModal" class="modal">
-        <div class="modal-content video-call-content">
-            <span class="close" onclick="closeVideoCall()">&times;</span>
-            <div class="video-container">
-                <video id="localVideo" autoplay muted></video>
-                <video id="remoteVideo" autoplay></video>
-            </div>
-            <div class="call-controls">
-                <button class="btn call-btn" onclick="toggleMute()">
-                    <i class="fas fa-microphone"></i>
-                </button>
-                <button class="btn call-btn" onclick="toggleVideo()">
-                    <i class="fas fa-video"></i>
-                </button>
-                <button class="btn end-call-btn" onclick="endCall()">
-                    <i class="fas fa-phone-slash"></i>
-                </button>
-            </div>
-        </div>
-    </div>
+    <script src="theme.js"></script>
+    <script>
+        // Load user data
+        document.addEventListener('DOMContentLoaded', function() {
+            const userName = localStorage.getItem('userName') || 'Patient';
+            const userNameElements = document.querySelectorAll('.user-name');
+            userNameElements.forEach(element => {
+                element.textContent = userName;
+            });
+        });
 
-    <script src="dashboard.js"></script>
+        function handleVideoConsult() {
+            alert('Opening video consultation...');
+        }
+
+        function handlePrescriptions() {
+            alert('Opening prescriptions...');
+        }
+
+        function handleMedicines() {
+            alert('Opening medicines tracker...');
+        }
+
+        function handleSupport() {
+            alert('Opening support chat...');
+        }
+
+        function handleJoinCall() {
+            alert('Joining video call with Dr. Sarah Johnson...');
+        }
+
+        function handleMarkAsTaken(button) {
+            button.textContent = 'Taken';
+            button.disabled = true;
+            button.style.backgroundColor = 'var(--disabled-btn)';
+            button.style.cursor = 'default';
+        }
+
+        function logout() {
+            localStorage.removeItem('userType');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            window.location.href = './index.html';
+        }
+    </script>
 </body>
 </html> 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,25 +14,97 @@
             <i class="fas fa-heartbeat"></i>
             <span>HealthCare Connect</span>
         </div>
-        <div class="nav-links">
-            <a href="#dashboard" class="active">Dashboard</a>
-            <a href="#appointments">Appointments</a>
-            <a href="#prescriptions">Prescriptions</a>
-            <a href="#medicines">Medicines</a>
+        <div class="theme-toggle-container">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <i class="fas fa-sun"></i>
+            </button>
         </div>
         <div class="user-profile">
             <span class="user-name">John Doe</span>
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <i class="fas fa-moon"></i>
-            </button>
             <button class="btn logout-btn" onclick="logout()">Logout</button>
         </div>
     </nav>
 
-    // ... existing dashboard content ...
+    <div class="dashboard-container">
+        <h1>Quick Actions</h1>
+        
+        <div class="quick-actions-grid">
+            <!-- Video Consultation Quick Action -->
+            <div class="quick-action-card" onclick="handleVideoConsultation()">
+                <div class="icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Video Consultation</h3>
+                <p>Connect with your doctor</p>
+            </div>
+
+            <!-- Prescriptions Quick Action -->
+            <div class="quick-action-card" onclick="handlePrescriptions()">
+                <div class="icon">
+                    <i class="fas fa-prescription"></i>
+                </div>
+                <h3>Prescriptions</h3>
+                <p>View your medical prescriptions</p>
+            </div>
+
+            <!-- Daily Medicines Quick Action -->
+            <div class="quick-action-card" onclick="handleMedicines()">
+                <div class="icon">
+                    <i class="fas fa-pills"></i>
+                </div>
+                <h3>Daily Medicines</h3>
+                <p>Track your medication schedule</p>
+            </div>
+
+            <!-- Support Quick Action -->
+            <div class="quick-action-card" onclick="handleSupport()">
+                <div class="icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Support</h3>
+                <p>Get help and support</p>
+            </div>
+        </div>
+
+        <!-- Upcoming Appointments Section -->
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2>Upcoming Appointments</h2>
+            </div>
+            <div class="appointment-card">
+                <div class="appointment-info">
+                    <img src="https://via.placeholder.com/50" alt="Dr. Sarah Johnson" class="doctor-avatar">
+                    <div class="details">
+                        <h3>Dr. Sarah Johnson</h3>
+                        <p>Cardiologist</p>
+                        <p class="appointment-time">Tomorrow, 10:00 AM</p>
+                    </div>
+                </div>
+                <button class="btn join-btn" onclick="handleJoinCall()">Join Call</button>
+            </div>
+        </section>
+
+        <!-- Today's Medicines Section -->
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2>Today's Medicines</h2>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-info">
+                    <h3>Paracetamol</h3>
+                    <p>500mg Tablet</p>
+                    <p class="medicine-time">8:00 AM, 2:00 PM, 8:00 PM</p>
+                </div>
+                <button class="btn mark-taken-btn" onclick="handleMarkAsTaken(this)">Mark as Taken</button>
+            </div>
+        </section>
+    </div>
 
     <script>
-        // Theme toggle functionality
+        // Force dark theme
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -41,20 +113,54 @@
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             
-            // Update theme toggle icon
             const themeIcon = document.querySelector('.theme-toggle i');
             themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
 
-        // Check for saved theme preference
+        // Initialize with dark theme
         document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            
-            // Set correct icon
+            document.documentElement.setAttribute('data-theme', 'dark');
             const themeIcon = document.querySelector('.theme-toggle i');
-            themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            themeIcon.className = 'fas fa-sun';
         });
+
+        function handleVideoConsultation() {
+            alert('Opening video consultation interface...');
+        }
+
+        function handlePrescriptions() {
+            alert('Opening prescriptions...');
+        }
+
+        function handleMedicines() {
+            alert('Opening medicines tracker...');
+        }
+
+        function handleSupport() {
+            alert('Opening support chat...');
+        }
+
+        function handleJoinCall() {
+            alert('Joining video call with Dr. Sarah Johnson...');
+        }
+
+        function handleMarkAsTaken(button) {
+            button.textContent = 'Taken';
+            button.disabled = true;
+            button.style.backgroundColor = '#e0e0e0';
+            button.style.cursor = 'default';
+        }
+
+        function logout() {
+            // Clear all user data from localStorage
+            localStorage.removeItem('userType');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('theme');
+            
+            // Redirect to login page
+            window.location.href = 'health website/index.html';
+        }
     </script>
 </body>
 </html> 
