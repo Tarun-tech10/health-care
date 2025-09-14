@@ -1,7 +1,7 @@
 /* Dark mode variables */
 :root {
-    --primary-color: #4a90e2;
-    --secondary-color: #50c878;
+    --primary-color: #4a90e2; /* Slateblue - calming purple */
+    --secondary-color: #5fb878; /* Soft green - growth and healing */
     --text-color: #333;
     --light-gray: #f5f5f5;
     --white: #ffffff;
@@ -309,25 +309,27 @@ body {
     transition: 0.3s;
 }
 
-.dark-mode-label i {
+.theme-toggle {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.theme-toggle i.fa-moon {
     position: absolute;
-    width: 24px;
-    top: 6px;
-    z-index: 100;
-}
-
-.dark-mode-label .fa-sun {
-    left: 6px;
-    color: #ffd900;
-    transition: 0.3s;
-}
-
-.dark-mode-label .fa-moon {
-    right: 6px;
+    top: -25px;
     color: #c8e3ff;
-    transition: 0.3s;
+    font-size: 18px;
     opacity: 0;
+    transition: 0.3s;
 }
+
+.dark-mode-checkbox:checked ~ .fa-moon {
+    opacity: 1;
+}
+
+/* Sun icon removed as requested */
 
 .dark-mode-checkbox:checked + .dark-mode-label {
     background: #242424;
@@ -343,9 +345,7 @@ body {
     opacity: 0;
 }
 
-.dark-mode-checkbox:checked + .dark-mode-label .fa-moon {
-    opacity: 1;
-}
+/* Moon icon is now outside the label, so this selector is no longer needed */
 
 /* Dark mode specific styles */
 [data-theme="dark"] .nav-links a {
@@ -539,4 +539,4 @@ body {
 
 [data-theme="dark"] .dashboard-form label {
     color: #e0e0e0;
-} 
+}

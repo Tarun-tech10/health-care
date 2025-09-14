@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard - HealthCare Connect</title>
+    <title>Student Dashboard - MindWell</title>
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
-            <i class="fas fa-heartbeat"></i>
-            <span>HealthCare Connect</span>
+            <i class="fas fa-brain"></i>
+            <span>MindWell</span>
         </div>
         <div class="nav-links">
             <a href="#" class="active">Dashboard</a>
             <a href="#">Appointments</a>
-            <a href="#">Prescriptions</a>
-            <a href="#">Medicines</a>
+            <a href="#">Resources</a>
+            <a href="#">Journal</a>
         </div>
         <div class="user-actions">
             <span class="user-name"></span>
@@ -37,17 +37,17 @@
                 <div class="action-card" onclick="handleVideoConsult()">
                     <i class="fas fa-video"></i>
                     <h3>Video Consultation</h3>
-                    <p>Connect with your doctor</p>
+                    <p>Connect with your counselor</p>
                 </div>
-                <div class="action-card" onclick="handlePrescriptions()">
-                    <i class="fas fa-prescription"></i>
-                    <h3>Prescriptions</h3>
-                    <p>View your medical prescriptions</p>
+                <div class="action-card" onclick="handleResources()">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Resources</h3>
+                    <p>Access mental health resources</p>
                 </div>
-                <div class="action-card" onclick="handleMedicines()">
-                    <i class="fas fa-pills"></i>
-                    <h3>Daily Medicines</h3>
-                    <p>Track your medication schedule</p>
+                <div class="action-card" onclick="handleMoodTracker()">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Mood Tracker</h3>
+                    <p>Track your daily mood patterns</p>
                 </div>
                 <div class="action-card" onclick="handleSupport()">
                     <i class="fas fa-headset"></i>
@@ -62,7 +62,7 @@
             <div class="appointment-card">
                 <div class="appointment-info">
                     <h3>Dr. Sarah Johnson</h3>
-                    <p>Cardiologist</p>
+                    <p>Counseling Psychologist</p>
                     <p class="appointment-time">Tomorrow, 10:00 AM</p>
                 </div>
                 <button class="join-call-btn" onclick="handleJoinCall()">Join Call</button>
@@ -70,14 +70,14 @@
         </section>
 
         <section class="medicines">
-            <h2>Today's Medicines</h2>
+            <h2>Daily Wellness Activities</h2>
             <div class="medicine-card">
                 <div class="medicine-info">
-                    <h3>Paracetamol</h3>
-                    <p>500mg Tablet</p>
-                    <p class="medicine-time">8:00 AM, 2:00 PM, 8:00 PM</p>
+                    <h3>Mindfulness Meditation</h3>
+                    <p>10-minute guided session</p>
+                    <p class="medicine-time">Recommended: Morning, Evening</p>
                 </div>
-                <button class="mark-taken-btn" onclick="handleMarkAsTaken(this)">Mark as Taken</button>
+                <button class="mark-taken-btn" onclick="handleMarkAsTaken(this)">Mark as Done</button>
             </div>
         </section>
     </main>
@@ -86,7 +86,7 @@
     <script>
         // Load user data
         document.addEventListener('DOMContentLoaded', function() {
-            const userName = localStorage.getItem('userName') || 'Patient';
+            const userName = localStorage.getItem('userName') || 'Student';
             const userNameElements = document.querySelectorAll('.user-name');
             userNameElements.forEach(element => {
                 element.textContent = userName;
@@ -97,12 +97,12 @@
             alert('Opening video consultation...');
         }
 
-        function handlePrescriptions() {
-            alert('Opening prescriptions...');
+        function handleResources() {
+            alert('Opening mental health resources...');
         }
 
-        function handleMedicines() {
-            alert('Opening medicines tracker...');
+        function handleMoodTracker() {
+            alert('Opening mood tracker...');
         }
 
         function handleSupport() {
@@ -114,7 +114,7 @@
         }
 
         function handleMarkAsTaken(button) {
-            button.textContent = 'Taken';
+            button.textContent = 'Completed';
             button.disabled = true;
             button.style.backgroundColor = 'var(--disabled-btn)';
             button.style.cursor = 'default';
@@ -128,4 +128,4 @@
         }
     </script>
 </body>
-</html> 
+</html>

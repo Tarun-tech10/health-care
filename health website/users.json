@@ -1,0 +1,20 @@
+{
+    "patients": [
+        {
+            "name": "tarun",
+            "email": "tarun@gmail.com",
+            "password": "aerhg"
+        },
+        {
+            "name": "tarun",
+            "email": "tarun@2378.gmail.com",
+            "password": "killjoy"
+        },
+        {
+            "name": "tarun",
+            "email": "tarun23@gmail.com",
+            "password": "2378"
+        }
+    ],
+    "doctors": []
+}

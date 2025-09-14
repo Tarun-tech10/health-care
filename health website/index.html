@@ -3,40 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthCare Connect</title>
+    <title>MindWell - Student Mental Health Support</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
-            <i class="fas fa-heartbeat"></i>
-            <span>HealthCare Connect</span>
+            <i class="fas fa-brain"></i>
+            <span>MindWell</span>
         </div>
         <div class="nav-links">
             <a href="index.html" class="active">Home</a>
             <a href="services.html">Services</a>
             <a href="about.html">About</a>
             <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
                 <input type="checkbox" id="darkModeToggle" class="dark-mode-checkbox">
                 <label for="darkModeToggle" class="dark-mode-label">
-                    <i class="fas fa-sun"></i>
-                    <i class="fas fa-moon"></i>
                     <span class="toggle-ball"></span>
                 </label>
             </div>
         </div>
         <div class="login-buttons">
-            <button class="btn patient-login" onclick="showLoginModal('patient')">Patient Login</button>
-            <button class="btn doctor-login" onclick="showLoginModal('doctor')">Doctor Login</button>
+            <button class="btn patient-login" onclick="showLoginModal('patient')">Student Login</button>
+            <button class="btn doctor-login" onclick="showLoginModal('doctor')">Counselor Login</button>
         </div>
     </nav>
 
     <header class="hero">
         <div class="hero-content">
-            <h1>Your Health, Our Priority</h1>
-            <p>Connect with healthcare professionals from the comfort of your home</p>
-            <button class="btn primary-btn" onclick="window.location.href='services.html'">Get Started</button>
+            <h1>Your Mental Wellbeing Matters</h1>
+            <p>Connect with mental health professionals and access resources designed for students</p>
+            <button class="btn primary-btn" onclick="window.location.href='services.html'">Get Support Now</button>
         </div>
     </header>
 
@@ -49,8 +48,8 @@
                 <div class="form-group">
                     <label for="userType">Login as:</label>
                     <select id="userType" name="userType" required>
-                        <option value="patient">Patient</option>
-                        <option value="doctor">Doctor</option>
+                        <option value="patient">Student</option>
+                        <option value="doctor">Counselor</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -61,11 +60,18 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                <button type="submit" class="btn primary-btn">Login</button>
+                <button type="submit" class="btn primary-btn" onclick="console.log('Login button clicked')">Login</button>
                 <p class="switch-form">Don't have an account? <a href="#" onclick="showRegistrationForm()">Register here</a></p>
             </form>
 
             <form id="registrationForm" style="display: none;">
+                <div class="form-group">
+                    <label for="regUserType">Register as:</label>
+                    <select id="regUserType" name="regUserType" required>
+                        <option value="patient">Student</option>
+                        <option value="doctor">Counselor</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="regName">Full Name</label>
                     <input type="text" id="regName" required>
@@ -78,7 +84,7 @@
                     <label for="regPassword">Password</label>
                     <input type="password" id="regPassword" required>
                 </div>
-                <button type="submit" class="btn primary-btn">Register</button>
+                <button type="submit" class="btn primary-btn" onclick="console.log('Register button clicked')">Register</button>
                 <p class="switch-form">Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
             </form>
         </div>
@@ -87,4 +93,4 @@
     <script src="script.js"></script>
     <script src="darkMode.js"></script>
 </body>
-</html> 
+</html>

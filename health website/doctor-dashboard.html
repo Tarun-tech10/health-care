@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Dashboard - HealthCare Connect</title>
+    <title>Counselor Dashboard - MindWell</title>
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
-            <i class="fas fa-heartbeat"></i>
-            <span>HealthCare Connect</span>
+            <i class="fas fa-brain"></i>
+            <span>MindWell</span>
         </div>
         <div class="nav-links">
             <a href="#" class="active">Dashboard</a>
             <a href="#">Appointments</a>
-            <a href="#">Patients</a>
+            <a href="#">Students</a>
             <a href="#">Schedule</a>
         </div>
         <div class="user-actions">
@@ -39,15 +39,15 @@
                     <h3>Video Consultations</h3>
                     <p>Manage your online consultations</p>
                 </div>
-                <div class="action-card" onclick="handlePatients()">
-                    <i class="fas fa-user-injured"></i>
-                    <h3>Patient Records</h3>
-                    <p>View and manage patient records</p>
+                <div class="action-card" onclick="handleStudents()">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Student Records</h3>
+                    <p>View and manage student records</p>
                 </div>
-                <div class="action-card" onclick="handlePrescriptions()">
-                    <i class="fas fa-prescription"></i>
-                    <h3>Prescriptions</h3>
-                    <p>Write and manage prescriptions</p>
+                <div class="action-card" onclick="handleTreatmentPlans()">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>Treatment Plans</h3>
+                    <p>Create and manage treatment plans</p>
                 </div>
                 <div class="action-card" onclick="handleSchedule()">
                     <i class="fas fa-calendar-alt"></i>
@@ -62,7 +62,7 @@
             <div class="appointment-card">
                 <div class="appointment-info">
                     <h3>John Smith</h3>
-                    <p>General Consultation</p>
+                    <p>Anxiety Management Session</p>
                     <p class="appointment-time">10:00 AM</p>
                 </div>
                 <button class="join-call-btn" onclick="handleStartCall()">Start Call</button>
@@ -70,7 +70,7 @@
             <div class="appointment-card">
                 <div class="appointment-info">
                     <h3>Emma Wilson</h3>
-                    <p>Follow-up Consultation</p>
+                    <p>Depression Follow-up</p>
                     <p class="appointment-time">11:30 AM</p>
                 </div>
                 <button class="join-call-btn" onclick="handleStartCall()">Start Call</button>
@@ -82,7 +82,7 @@
     <script>
         // Load user data
         document.addEventListener('DOMContentLoaded', function() {
-            const userName = localStorage.getItem('userName') || 'Doctor';
+            const userName = localStorage.getItem('userName') || 'Counselor';
             const userNameElements = document.querySelectorAll('.user-name');
             userNameElements.forEach(element => {
                 element.textContent = userName;
@@ -93,12 +93,12 @@
             alert('Opening video consultations...');
         }
 
-        function handlePatients() {
-            alert('Opening patient records...');
+        function handleStudents() {
+            alert('Opening student records...');
         }
 
-        function handlePrescriptions() {
-            alert('Opening prescriptions manager...');
+        function handleTreatmentPlans() {
+            alert('Opening treatment plans manager...');
         }
 
         function handleSchedule() {
@@ -106,7 +106,7 @@
         }
 
         function handleStartCall() {
-            alert('Starting video call with patient...');
+            alert('Starting video call with student...');
         }
 
         function logout() {
@@ -117,4 +117,4 @@
         }
     </script>
 </body>
-</html> 
+</html>

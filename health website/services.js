@@ -39,10 +39,24 @@ function addMessage(text, sender) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${sender}`;
     
+    const avatar = document.createElement('div');
+    avatar.className = 'avatar';
+    avatar.innerHTML = sender === 'ai' ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user"></i>';
+    
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';
-    contentDiv.innerHTML = `<p>${text}</p>`;
     
+    const messageText = document.createElement('p');
+    messageText.textContent = text;
+    
+    const timeDiv = document.createElement('div');
+    timeDiv.className = 'message-time';
+    timeDiv.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    
+    contentDiv.appendChild(messageText);
+    contentDiv.appendChild(timeDiv);
+    
+    messageDiv.appendChild(avatar);
     messageDiv.appendChild(contentDiv);
     chatMessages.appendChild(messageDiv);
     
@@ -119,4 +133,4 @@ window.onclick = function(event) {
     if (event.target == modal) {
         closeAgentModal();
     }
-} 
+}
