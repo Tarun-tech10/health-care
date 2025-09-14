@@ -3,7 +3,7 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Enable CORS for all routes
 app.use(cors());
@@ -32,15 +32,15 @@ app.get('/appointments', (req, res) => {
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'your-email@gmail.com', // Replace with your Gmail
-        pass: 'your-app-password' // Replace with your Gmail App Password
+        user: process.env.GMAIL_USER || 'your-email@gmail.com',
+        pass: process.env.GMAIL_PASS || 'your-app-password'
     }
 });
 
 // Mock user database
 const users = [
-    { email: 'doctor@example.com', password: 'doctor123', type: 'doctor' },
-    { email: 'patient@example.com', password: 'patient123', type: 'patient' }
+    { email: 'doctor@example.com', password: 'doctor123', type: 'doctor', name: 'Dr. Sarah Johnson' },
+    { email: 'patient@example.com', password: 'patient123', type: 'patient', name: 'John Doe' }
 ];
 
 // Login endpoint
@@ -78,7 +78,48 @@ app.post('/api/login', (req, res) => {
     res.json({ 
         success: true, 
         message: 'Login successful',
+        name: user.name,
         user: { email: user.email, type: user.type }
+    });
+});
+
+// Registration endpoint
+app.post('/api/register', (req, res) => {
+    console.log('Registration attempt:', req.body);
+    const { name, email, password, userType } = req.body;
+
+    if (!name || !email || !password || !userType) {
+        console.log('Missing required fields');
+        return res.status(400).json({ 
+            success: false, 
+            message: 'All fields are required' 
+        });
+    }
+
+    // Check if user already exists
+    const existingUser = users.find(u => u.email === email);
+    if (existingUser) {
+        console.log('User already exists:', email);
+        return res.status(400).json({ 
+            success: false, 
+            message: 'User already exists' 
+        });
+    }
+
+    // Add new user
+    const newUser = {
+        name: name,
+        email: email,
+        password: password,
+        type: userType
+    };
+    users.push(newUser);
+
+    console.log('Registration successful for:', email);
+    res.json({ 
+        success: true, 
+        message: 'Registration successful',
+        name: name
     });
 });
 
@@ -91,8 +132,8 @@ app.post('/api/connect-agent', (req, res) => {
     }
 
     const mailOptions = {
-        from: 'your-email@gmail.com', // Replace with your Gmail
-        to: 'your-email@gmail.com', // Replace with your email where you want to receive notifications
+        from: process.env.GMAIL_USER || 'your-email@gmail.com',
+        to: process.env.GMAIL_USER || 'your-email@gmail.com',
         subject: 'New Agent Connection Request',
         html: `
             <h2>New Agent Connection Request</h2>

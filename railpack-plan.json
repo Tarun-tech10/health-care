@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "name": "healthcare-connect",
+  "description": "Healthcare Connect Platform",
+  "build": {
+    "commands": [
+      "npm ci"
+    ],
+    "output": "."
+  },
+  "deploy": {
+    "start": "npm start"
+  },
+  "environment": {
+    "NODE_ENV": "production",
+    "PORT": "3000"
+  }
+}

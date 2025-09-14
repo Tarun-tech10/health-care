@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - HealthCare Connect</title>
+    <title>About Us - MindWell</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,42 +11,26 @@
 <body>
     <nav class="navbar">
         <div class="logo">
-            <i class="fas fa-heartbeat"></i>
-            <span>HealthCare Connect</span>
+            <i class="fas fa-brain"></i>
+            <span>MindWell</span>
         </div>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="services.html">Services</a>
-            <a href="about.html" class="active">About</a>
+            <a href="about.html">About</a>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+                <input type="checkbox" id="darkModeToggle" class="dark-mode-checkbox">
+                <label for="darkModeToggle" class="dark-mode-label">
+                    <span class="toggle-ball"></span>
+                </label>
+            </div>
         </div>
         <div class="login-buttons">
-            <button class="btn patient-login" onclick="showLoginModal('patient')">Patient Login</button>
-            <button class="btn doctor-login" onclick="showLoginModal('doctor')">Doctor Login</button>
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-                <i class="fas fa-moon"></i>
-            </button>
+            <button class="btn patient-login" onclick="showLoginModal('patient')">Student Login</button>
+            <button class="btn doctor-login" onclick="showLoginModal('doctor')">Counselor Login</button>
         </div>
     </nav>
-
-    <div class="about-container">
-        <section class="about-hero">
-            <h1>Transforming Healthcare Through Technology</h1>
-            <p>Bridging the gap between patients and healthcare providers with innovative digital solutions</p>
-        </section>
-
-        <section class="about-content">
-            <div class="mission-vision">
-                <div class="card">
-                    <h2>Our Mission</h2>
-                    <p>To provide accessible, efficient, and high-quality healthcare services through digital innovation.</p>
-                </div>
-                <div class="card">
-                    <h2>Our Vision</h2>
-                    <p>To revolutionize healthcare delivery by creating a seamless connection between patients and healthcare providers.</p>
-                </div>
-            </div>
-        </section>
-    </div>
 
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
@@ -55,19 +39,171 @@
             <h2 id="modalTitle">Login</h2>
             <form id="loginForm">
                 <div class="form-group">
+                    <label for="userType">Login as:</label>
+                    <select id="userType" name="userType" required>
+                        <option value="patient">Student</option>
+                        <option value="doctor">Counselor</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" required>
+                    <input type="password" id="password" name="password" required>
                 </div>
-                <button type="submit" class="btn primary-btn">Login</button>
+                <button type="submit" class="btn primary-btn" onclick="console.log('Login button clicked')">Login</button>
+                <p class="switch-form">Don't have an account? <a href="#" onclick="showRegistrationForm()">Register here</a></p>
+            </form>
+
+            <form id="registrationForm" style="display: none;">
+                <div class="form-group">
+                    <label for="regUserType">Register as:</label>
+                    <select id="regUserType" name="regUserType" required>
+                        <option value="patient">Student</option>
+                        <option value="doctor">Counselor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" required>
+                </div>
+                <button type="submit" class="btn primary-btn" onclick="console.log('Register button clicked')">Register</button>
+                <p class="switch-form">Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
             </form>
         </div>
     </div>
 
+    <div class="about-container">
+        <section class="about-hero">
+            <h1>Transforming Student Mental Health Support</h1>
+            <p>Bridging the gap between students and mental health counselors with innovative digital solutions</p>
+        </section>
+
+        <section class="mission-section">
+            <div class="mission-content">
+                <h2>Our Mission</h2>
+                <p>At MindWell, we're dedicated to making quality mental health support accessible to all students. We believe that technology should enhance, not replace, the human connection in mental healthcare.</p>
+                <div class="mission-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <h3>50,000+</h3>
+                        <p>Student Users</p>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-user-md"></i>
+                        <h3>1,000+</h3>
+                        <p>Mental Health Counselors</p>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <h3>24/7</h3>
+                        <p>Support Available</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="values-section">
+            <h2>Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Student-Centric Support</h3>
+                    <p>We put students first, ensuring their mental health needs and comfort are our top priority in every interaction.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Privacy & Security</h3>
+                    <p>We maintain the highest standards of data protection and confidentiality for all our users.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Innovation</h3>
+                    <p>We continuously evolve our platform to provide cutting-edge mental health support solutions for students.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Trust & Transparency</h3>
+                    <p>We build relationships based on honesty, integrity, and clear communication.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-section">
+            <h2>Meet Our Leadership Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Dr. Sarah Johnson">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p>Chief Mental Health Officer</p>
+                    <p>20+ years of experience in mental health services</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Michael Chen">
+                    <h3>Michael Chen</h3>
+                    <p>Chief Technology Officer</p>
+                    <p>Expert in mental health support platforms</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Emily Rodriguez">
+                    <h3>Emily Rodriguez</h3>
+                    <p>Head of Student Experience</p>
+                    <p>Dedicated to improving mental health support accessibility for students</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="achievements-section">
+            <h2>Our Achievements</h2>
+            <div class="achievements-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2023</h3>
+                        <p>Launched AI-powered mental health assistant for students</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2022</h3>
+                        <p>Expanded to 50+ cities nationwide</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2021</h3>
+                        <p>Received Mental Health Innovation Award</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2020</h3>
+                        <p>Platform launched with 1000+ mental health counselors</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Join Us in Transforming Student Mental Health Support</h2>
+            <p>Whether you're a student seeking support or a mental health counselor looking to help, we're here for you.</p>
+            <div class="cta-buttons">
+                <button class="btn primary-btn" onclick="window.location.href='services.html'">Get Started</button>
+            </div>
+        </section>
+    </div>
+// hello 
     <script src="script.js"></script>
-    <script src="theme.js"></script>
+    <script src="darkMode.js"></script>
+    <script src="mobile-menu.js"></script>
 </body>
-</html> 
+</html>

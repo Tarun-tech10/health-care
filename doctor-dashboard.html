@@ -1,195 +1,121 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Dashboard - HealthCare Connect</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Counselor Dashboard - MindWell</title>
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
-            <i class="fas fa-heartbeat"></i>
-            <span>HealthCare Connect</span>
+            <i class="fas fa-brain"></i>
+            <span>MindWell</span>
         </div>
-        <div class="theme-toggle-container">
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-                <i class="fas fa-sun"></i>
+        <div class="nav-links">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Appointments</a>
+            <a href="#">Students</a>
+            <a href="#">Schedule</a>
+        </div>
+        <div class="user-actions">
+            <span class="user-name"></span>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
             </button>
-        </div>
-        <div class="user-profile">
-            <span class="user-name">Dr. Sarah Johnson</span>
-            <button class="btn logout-btn" onclick="logout()">Logout</button>
+            <button onclick="logout()" class="logout-btn">Logout</button>
         </div>
     </nav>
 
-    <div class="dashboard-container">
-        <h1>Quick Actions</h1>
+    <main class="dashboard-content">
+        <h1>Welcome, Dr. <span class="user-name"></span></h1>
         
-        <div class="quick-actions-grid">
-            <!-- Patient Appointments Quick Action -->
-            <div class="quick-action-card" onclick="handlePatientAppointments()">
-                <div class="icon">
-                    <i class="fas fa-calendar-check"></i>
+        <section class="quick-actions">
+            <h2>Quick Actions</h2>
+            <div class="action-grid">
+                <div class="action-card" onclick="handleConsultations()">
+                    <i class="fas fa-video"></i>
+                    <h3>Video Consultations</h3>
+                    <p>Manage your online consultations</p>
                 </div>
-                <h3>Patient Appointments</h3>
-                <p>Manage your appointments</p>
-            </div>
-
-            <!-- Patient Records Quick Action -->
-            <div class="quick-action-card" onclick="handlePatientRecords()">
-                <div class="icon">
-                    <i class="fas fa-file-medical"></i>
+                <div class="action-card" onclick="handleStudents()">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Student Records</h3>
+                    <p>View and manage student records</p>
                 </div>
-                <h3>Patient Records</h3>
-                <p>View and update medical records</p>
-            </div>
-
-            <!-- Prescribe Medicines Quick Action -->
-            <div class="quick-action-card" onclick="handlePrescribeMedicines()">
-                <div class="icon">
-                    <i class="fas fa-prescription-bottle-medical"></i>
+                <div class="action-card" onclick="handleTreatmentPlans()">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>Treatment Plans</h3>
+                    <p>Create and manage treatment plans</p>
                 </div>
-                <h3>Prescribe Medicines</h3>
-                <p>Write new prescriptions</p>
-            </div>
-
-            <!-- Analytics Quick Action -->
-            <div class="quick-action-card" onclick="handleAnalytics()">
-                <div class="icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3>Analytics</h3>
-                <p>View patient statistics</p>
-            </div>
-        </div>
-
-        <!-- Upcoming Appointments Section -->
-        <section class="dashboard-section">
-            <div class="section-header">
-                <h2>Today's Appointments</h2>
-            </div>
-            <div class="appointment-card">
-                <div class="appointment-info">
-                    <img src="https://via.placeholder.com/50" alt="John Doe" class="patient-avatar">
-                    <div class="details">
-                        <h3>John Doe</h3>
-                        <p>Regular Checkup</p>
-                        <p class="appointment-time">10:00 AM</p>
-                    </div>
-                </div>
-                <div class="appointment-actions">
-                    <button class="btn join-btn" onclick="handleStartConsultation()">Start Consultation</button>
-                    <button class="btn reschedule-btn" onclick="handleReschedule()">Reschedule</button>
-                </div>
-            </div>
-
-            <div class="appointment-card">
-                <div class="appointment-info">
-                    <img src="https://via.placeholder.com/50" alt="Jane Smith" class="patient-avatar">
-                    <div class="details">
-                        <h3>Jane Smith</h3>
-                        <p>Follow-up</p>
-                        <p class="appointment-time">11:30 AM</p>
-                    </div>
-                </div>
-                <div class="appointment-actions">
-                    <button class="btn join-btn" onclick="handleStartConsultation()">Start Consultation</button>
-                    <button class="btn reschedule-btn" onclick="handleReschedule()">Reschedule</button>
+                <div class="action-card" onclick="handleSchedule()">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Schedule</h3>
+                    <p>Manage your appointments</p>
                 </div>
             </div>
         </section>
 
-        <!-- Recent Patient Updates Section -->
-        <section class="dashboard-section">
-            <div class="section-header">
-                <h2>Recent Patient Updates</h2>
+        <section class="appointments">
+            <h2>Today's Appointments</h2>
+            <div class="appointment-card">
+                <div class="appointment-info">
+                    <h3>John Smith</h3>
+                    <p>Anxiety Management Session</p>
+                    <p class="appointment-time">10:00 AM</p>
+                </div>
+                <button class="join-call-btn" onclick="handleStartCall()">Start Call</button>
             </div>
-            <div class="updates-card">
-                <div class="update-item">
-                    <div class="update-info">
-                        <h3>Medical Report Updated</h3>
-                        <p>Blood test results for John Doe</p>
-                        <p class="update-time">30 minutes ago</p>
-                    </div>
-                    <button class="btn view-btn" onclick="handleViewUpdate()">View</button>
+            <div class="appointment-card">
+                <div class="appointment-info">
+                    <h3>Emma Wilson</h3>
+                    <p>Depression Follow-up</p>
+                    <p class="appointment-time">11:30 AM</p>
                 </div>
-                <div class="update-item">
-                    <div class="update-info">
-                        <h3>Prescription Renewal</h3>
-                        <p>Request from Jane Smith</p>
-                        <p class="update-time">1 hour ago</p>
-                    </div>
-                    <button class="btn view-btn" onclick="handleViewUpdate()">View</button>
-                </div>
+                <button class="join-call-btn" onclick="handleStartCall()">Start Call</button>
             </div>
         </section>
-    </div>
+    </main>
 
+    <script src="theme.js"></script>
+    <script src="mobile-menu.js"></script>
     <script>
-        // Force dark theme
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            const themeIcon = document.querySelector('.theme-toggle i');
-            themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        }
-
-        // Initialize with dark theme
+        // Load user data
         document.addEventListener('DOMContentLoaded', function() {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            const themeIcon = document.querySelector('.theme-toggle i');
-            themeIcon.className = 'fas fa-sun';
+            const userName = localStorage.getItem('userName') || 'Counselor';
+            const userNameElements = document.querySelectorAll('.user-name');
+            userNameElements.forEach(element => {
+                element.textContent = userName;
+            });
         });
 
-        function handlePatientAppointments() {
-            alert('Opening patient appointments...');
+        function handleConsultations() {
+            alert('Opening video consultations...');
         }
 
-        function handlePatientRecords() {
-            alert('Opening patient records...');
+        function handleStudents() {
+            alert('Opening student records...');
         }
 
-        function handlePrescribeMedicines() {
-            alert('Opening prescription interface...');
+        function handleTreatmentPlans() {
+            alert('Opening treatment plans manager...');
         }
 
-        function handleAnalytics() {
-            alert('Opening analytics dashboard...');
+        function handleSchedule() {
+            alert('Opening schedule manager...');
         }
 
-        function handleStartConsultation() {
-            alert('Starting video consultation...');
-        }
-
-        function handleReschedule() {
-            alert('Opening reschedule interface...');
-        }
-
-        function handleViewUpdate() {
-            alert('Opening update details...');
+        function handleStartCall() {
+            alert('Starting video call with student...');
         }
 
         function logout() {
-            // Clear all user data from localStorage
             localStorage.removeItem('userType');
             localStorage.removeItem('userEmail');
             localStorage.removeItem('userName');
-            localStorage.removeItem('theme');
-            
-            // Redirect to login page
-            window.location.href = 'health website/index.html';
+            window.location.href = './index.html';
         }
     </script>
 </body>
-</html> 
+</html>

@@ -1,139 +1,109 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard - HealthCare Connect</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Student Dashboard - MindWell</title>
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
-            <i class="fas fa-heartbeat"></i>
-            <span>HealthCare Connect</span>
+            <i class="fas fa-brain"></i>
+            <span>MindWell</span>
         </div>
-        <div class="theme-toggle-container">
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-                <i class="fas fa-sun"></i>
+        <div class="nav-links">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Appointments</a>
+            <a href="#">Resources</a>
+            <a href="#">Journal</a>
+        </div>
+        <div class="user-actions">
+            <span class="user-name"></span>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
             </button>
-        </div>
-        <div class="user-profile">
-            <span class="user-name">John Doe</span>
-            <button class="btn logout-btn" onclick="logout()">Logout</button>
+            <button onclick="logout()" class="logout-btn">Logout</button>
         </div>
     </nav>
 
-    <div class="dashboard-container">
-        <h1>Quick Actions</h1>
+    <main class="dashboard-content">
+        <h1>Welcome, <span class="user-name"></span></h1>
         
-        <div class="quick-actions-grid">
-            <!-- Video Consultation Quick Action -->
-            <div class="quick-action-card" onclick="handleVideoConsultation()">
-                <div class="icon">
+        <section class="quick-actions">
+            <h2>Quick Actions</h2>
+            <div class="action-grid">
+                <div class="action-card" onclick="handleVideoConsult()">
                     <i class="fas fa-video"></i>
+                    <h3>Video Consultation</h3>
+                    <p>Connect with your counselor</p>
                 </div>
-                <h3>Video Consultation</h3>
-                <p>Connect with your doctor</p>
-            </div>
-
-            <!-- Prescriptions Quick Action -->
-            <div class="quick-action-card" onclick="handlePrescriptions()">
-                <div class="icon">
-                    <i class="fas fa-prescription"></i>
+                <div class="action-card" onclick="handleResources()">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Resources</h3>
+                    <p>Access mental health resources</p>
                 </div>
-                <h3>Prescriptions</h3>
-                <p>View your medical prescriptions</p>
-            </div>
-
-            <!-- Daily Medicines Quick Action -->
-            <div class="quick-action-card" onclick="handleMedicines()">
-                <div class="icon">
-                    <i class="fas fa-pills"></i>
+                <div class="action-card" onclick="handleMoodTracker()">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Mood Tracker</h3>
+                    <p>Track your daily mood patterns</p>
                 </div>
-                <h3>Daily Medicines</h3>
-                <p>Track your medication schedule</p>
-            </div>
-
-            <!-- Support Quick Action -->
-            <div class="quick-action-card" onclick="handleSupport()">
-                <div class="icon">
+                <div class="action-card" onclick="handleSupport()">
                     <i class="fas fa-headset"></i>
+                    <h3>Support</h3>
+                    <p>Get help and support</p>
                 </div>
-                <h3>Support</h3>
-                <p>Get help and support</p>
             </div>
-        </div>
+        </section>
 
-        <!-- Upcoming Appointments Section -->
-        <section class="dashboard-section">
-            <div class="section-header">
-                <h2>Upcoming Appointments</h2>
-            </div>
+        <section class="appointments">
+            <h2>Upcoming Appointments</h2>
             <div class="appointment-card">
                 <div class="appointment-info">
-                    <img src="https://via.placeholder.com/50" alt="Dr. Sarah Johnson" class="doctor-avatar">
-                    <div class="details">
-                        <h3>Dr. Sarah Johnson</h3>
-                        <p>Cardiologist</p>
-                        <p class="appointment-time">Tomorrow, 10:00 AM</p>
-                    </div>
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p>Counseling Psychologist</p>
+                    <p class="appointment-time">Tomorrow, 10:00 AM</p>
                 </div>
-                <button class="btn join-btn" onclick="handleJoinCall()">Join Call</button>
+                <button class="join-call-btn" onclick="handleJoinCall()">Join Call</button>
             </div>
         </section>
 
-        <!-- Today's Medicines Section -->
-        <section class="dashboard-section">
-            <div class="section-header">
-                <h2>Today's Medicines</h2>
-            </div>
+        <section class="medicines">
+            <h2>Daily Wellness Activities</h2>
             <div class="medicine-card">
                 <div class="medicine-info">
-                    <h3>Paracetamol</h3>
-                    <p>500mg Tablet</p>
-                    <p class="medicine-time">8:00 AM, 2:00 PM, 8:00 PM</p>
+                    <h3>Mindfulness Meditation</h3>
+                    <p>10-minute guided session</p>
+                    <p class="medicine-time">Recommended: Morning, Evening</p>
                 </div>
-                <button class="btn mark-taken-btn" onclick="handleMarkAsTaken(this)">Mark as Taken</button>
+                <button class="mark-taken-btn" onclick="handleMarkAsTaken(this)">Mark as Done</button>
             </div>
         </section>
-    </div>
+    </main>
 
+    <script src="theme.js"></script>
+    <script src="mobile-menu.js"></script>
     <script>
-        // Force dark theme
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            const themeIcon = document.querySelector('.theme-toggle i');
-            themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        }
-
-        // Initialize with dark theme
+        // Load user data
         document.addEventListener('DOMContentLoaded', function() {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            const themeIcon = document.querySelector('.theme-toggle i');
-            themeIcon.className = 'fas fa-sun';
+            const userName = localStorage.getItem('userName') || 'Student';
+            const userNameElements = document.querySelectorAll('.user-name');
+            userNameElements.forEach(element => {
+                element.textContent = userName;
+            });
         });
 
-        function handleVideoConsultation() {
-            alert('Opening video consultation interface...');
+        function handleVideoConsult() {
+            alert('Opening video consultation...');
         }
 
-        function handlePrescriptions() {
-            alert('Opening prescriptions...');
+        function handleResources() {
+            alert('Opening mental health resources...');
         }
 
-        function handleMedicines() {
-            alert('Opening medicines tracker...');
+        function handleMoodTracker() {
+            alert('Opening mood tracker...');
         }
 
         function handleSupport() {
@@ -145,22 +115,18 @@
         }
 
         function handleMarkAsTaken(button) {
-            button.textContent = 'Taken';
+            button.textContent = 'Completed';
             button.disabled = true;
-            button.style.backgroundColor = '#e0e0e0';
+            button.style.backgroundColor = 'var(--disabled-btn)';
             button.style.cursor = 'default';
         }
 
         function logout() {
-            // Clear all user data from localStorage
             localStorage.removeItem('userType');
             localStorage.removeItem('userEmail');
             localStorage.removeItem('userName');
-            localStorage.removeItem('theme');
-            
-            // Redirect to login page
-            window.location.href = 'health website/index.html';
+            window.location.href = './index.html';
         }
     </script>
 </body>
-</html> 
+</html>
