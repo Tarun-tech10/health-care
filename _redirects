@@ -1,0 +1,15 @@
+# Netlify redirects for healthcare platform
+# Redirect old paths to new structure
+
+# Redirect old health website paths to root
+/health%20website/* /:splat 301
+/health website/* /:splat 301
+
+# Handle SPA routing for dashboards
+/patient-dashboard /patient-dashboard.html 200
+/doctor-dashboard /doctor-dashboard.html 200
+/services /services.html 200
+/about /about.html 200
+
+# Fallback for any other routes
+/* /index.html 200
