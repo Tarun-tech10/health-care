@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        button { padding: 10px 20px; margin: 10px; cursor: pointer; }
+        .result { margin: 10px 0; padding: 10px; background: #f5f5f5; }
+    </style>
+</head>
+<body>
+    <h1>Healthcare API Test</h1>
+    
+    <div class="test-section">
+        <h2>Test Login</h2>
+        <button onclick="testLogin()">Test Login (patient@example.com)</button>
+        <div id="loginResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test Registration</h2>
+        <button onclick="testRegistration()">Test Registration</button>
+        <div id="regResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test Doctor Login</h2>
+        <button onclick="testDoctorLogin()">Test Doctor Login</button>
+        <div id="doctorResult" class="result"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://health-care-production-54d7.up.railway.app';
+        
+        async function testLogin() {
+            const resultDiv = document.getElementById('loginResult');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: 'patient@example.com',
+                        password: 'patient123',
+                        userType: 'patient'
+                    })
+                });
+                
+                const result = await response.json();
+                resultDiv.innerHTML = `<strong>Status:</strong> ${response.status}<br><strong>Response:</strong> ${JSON.stringify(result, null, 2)}`;
+            } catch (error) {
+                resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+            }
+        }
+        
+        async function testRegistration() {
+            const resultDiv = document.getElementById('regResult');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test User',
+                        email: 'testuser' + Date.now() + '@example.com',
+                        password: 'test123',
+                        userType: 'patient'
+                    })
+                });
+                
+                const result = await response.json();
+                resultDiv.innerHTML = `<strong>Status:</strong> ${response.status}<br><strong>Response:</strong> ${JSON.stringify(result, null, 2)}`;
+            } catch (error) {
+                resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+            }
+        }
+        
+        async function testDoctorLogin() {
+            const resultDiv = document.getElementById('doctorResult');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: 'doctor@example.com',
+                        password: 'doctor123',
+                        userType: 'doctor'
+                    })
+                });
+                
+                const result = await response.json();
+                resultDiv.innerHTML = `<strong>Status:</strong> ${response.status}<br><strong>Response:</strong> ${JSON.stringify(result, null, 2)}`;
+            } catch (error) {
+                resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

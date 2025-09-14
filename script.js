@@ -167,7 +167,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } catch (error) {
                 console.error('Login error:', error);
-                alert('Login failed. Please try again later.');
+                console.error('Error details:', {
+                    message: error.message,
+                    stack: error.stack,
+                    name: error.name
+                });
+                alert(`Login failed: ${error.message}. Please check console for details.`);
             }
         });
     }
@@ -252,7 +257,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } catch (error) {
                 console.error('Registration error:', error);
-                alert('Registration failed. Please try again later.');
+                console.error('Error details:', {
+                    message: error.message,
+                    stack: error.stack,
+                    name: error.name
+                });
+                alert(`Registration failed: ${error.message}. Please check console for details.`);
             }
         });
     } else {
